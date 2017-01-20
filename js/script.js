@@ -13,46 +13,39 @@ module.config(function ($urlRouterProvider, $stateProvider) {
 
 module.controller("homeCtrl", function ($scope, $rootScope, recipeService) {
     var promise = recipeService.getRecipe();
+    console.log("hej");
     promise.then(function (data) {
+        console.log("hej2");
         $scope.recipe = data.data;
+        console.log(data.data);
+
     });
 });
 
 module.service("recipeService", function ($q, $http, $rootScope) {
+    
     this.getRecipe = function () {
         var deffer = $q.defer();
         var url = "http://localhost:8080/projekt4/webresources/recipes";
-        var auth = "Basic " + window.btoa($rootScope.user + ":" + $rootScope.pass);
-
-        $http({
-            url: url,
-            method: "GET",
-            headers: {'Authorization': auth}
-        }).then(function (data, status) {
+        $http.get(url).then(function (data) {
+            console.log("hej_!");
             deffer.resolve(data);
+            console.log(data);
+
         });
         return deffer.promise;
-  };
-  });
-  
-  module.controller("logInCtrl", function ($scope, $rootScope, recipeService) {
-      
-      $scope.createUser = function (){
-          recipeService.createUser($scope.username, $scope.password);
-      };
-  });
-  
-  module.service("recipeService", function ($q, $http, $rootScope) {
+    };
+
     this.createUser = function (username, password) {
-        
-        var data ={
+
+        var data = {
             username: username,
             password: password
         };
-            
+
         var deffer = $q.defer();
         var url = "http://localhost:8080/projekt4/webresources/user";
-        
+
         $http({
             url: url,
             method: "POST",
@@ -61,5 +54,13 @@ module.service("recipeService", function ($q, $http, $rootScope) {
             deffer.resolve(data);
         });
         return deffer.promise;
-  };
-  });
+    };
+
+});
+
+module.controller("logInCtrl", function ($scope, $rootScope, recipeService) {
+
+    $scope.createUser = function () {
+        recipeService.createUser($scope.username, $scope.password);
+    };
+});
