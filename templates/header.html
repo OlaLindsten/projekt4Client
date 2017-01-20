@@ -1,0 +1,50 @@
+<nav class="navbar navbar-fixed-top navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <!-- Header -->
+
+            <a class="navbar-left page-scroll" href="#page-top"> </a>
+            <button class="navbar-toggle" data-toggle="collapse" data-target="#nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+        </div>
+        <div class="collapse navbar-collapse navbar-right" id="nav-collapse">
+            <!-- Innehåll -->
+            <ul class=" nav navbar-nav">
+                <li><a class="page-scroll" href="#page-top"> Hem </a></li>
+                <li><a class="page-scroll" href="#About"> Meny </a></li>
+                <li><a class="page-scroll" href="#kontakt" data-toggle="modal" data-target="#myModal"> Login </a></li>
+            </ul>
+            </nav>
+
+            <!-- Modal -->
+
+            <div id="myModal" class="modal fade" role="dialog" ng-controller="logInCtrl">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Login to Your Account</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <label>Username: <input type="text" name="user" placeholder="Username" ng-model="username"></label>
+                                <label>Password: <input type="password" name="pass" placeholder="Password" ng-model="password"></label>
+                            </form>                        
+                        </div>
+                         
+                        <div class="modal-footer">
+                            <button class="btn btn-block" data-dismiss="modal" ng-click="createUser()" type="submit" value="Submit">Submit</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
