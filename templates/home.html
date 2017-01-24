@@ -3,13 +3,14 @@
         <div class="col-lg-8 col-lg-offset-2">
             <h2>recipe</h2>
             <table class="table table-striped">
-                <tr><th>Name</th><th>Description</th> <th>Instruction</th><th>User</th><th>Category</th></tr>
-                <tr ng-repeat="recipes in recipe">
+                <tr><th>Name</th> <th>Description</th><th>By</th><th>Category</th><th>Read more </th></tr>
+                <tr ng-repeat="recipes in recipe"> 
                     <td>{{recipes.recipe_name}}</td>
                     <td>{{recipes.recipe_description}}</td>
-                    <td>{{recipes.recipe_instruction}}</td>
                     <td>{{recipes.username}}</td>
                     <td>{{recipes.category_name}}</td>
+                    <td><input class="btn btn-primary btn-block" type="submit" value="More" ui-sref="viewRecipe({id: recipes.recipe_id})" ng-click="getRecipeId()"/></td>
+
                 </tr>
             </table>
         </div>

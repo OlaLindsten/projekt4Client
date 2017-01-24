@@ -3,7 +3,7 @@
         <div class="navbar-header">
             <!-- Header -->
 
-            <a class="navbar-left page-scroll" href="#page-top"> </a>
+            <a class="navbar-left page-scroll"> </a>
             <button class="navbar-toggle" data-toggle="collapse" data-target="#nav-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -14,14 +14,15 @@
         <div class="collapse navbar-collapse navbar-right" id="nav-collapse">
             <!-- Innehåll -->
             <ul class=" nav navbar-nav">
-                <li><a class="page-scroll" href="#page-top"> Hem </a></li>
-                <li><a class="page-scroll" href="#About"> Meny </a></li>
-                <li><a class="page-scroll" href="#kontakt" data-toggle="modal" data-target="#myModal"> Login </a></li>
+                <li><a ui-sref="home"> Home</a></li>
+                <li><a ng-show="isLoggedIn" ui-sref="addRecipe"> Add recipe</a></li>
+                <li><a ng-show="isLoggedIn" ui-sref="changeRecipe"> Update or delete recipe </a></li>
+                <li><a ng-hide="isLoggedIn" data-toggle="modal" data-target="#myModal"> Login </a></li>
             </ul>
             </nav>
 
-            <!-- Modal -->
 
+            <!-- Modal -->
             <div id="myModal" class="modal fade" role="dialog" ng-controller="logInCtrl">
                 <div class="modal-dialog">
 
@@ -33,13 +34,15 @@
                         </div>
                         <div class="modal-body">
                             <form>
-                                <label>Username: <input type="text" name="user" placeholder="Username" ng-model="username"></label>
-                                <label>Password: <input type="password" name="pass" placeholder="Password" ng-model="password"></label>
-                            </form>                        
+                                <label>Username: <input type="text" placeholder="Username" ng-model="username"></label>
+                                <label>Password: <input type="password" placeholder="Password" ng-model="password"></label>
+                            </form>          
+                            <label><a ui-sref="register" data-dismiss="modal">Or Register</a></label>
                         </div>
-                         
+
                         <div class="modal-footer">
-                            <button class="btn btn-block" data-dismiss="modal" ng-click="createUser()" type="submit" value="Submit">Submit</button>
+                            <button class="btn btn-block" data-dismiss="modal" ng-click="loggIn()" type="submit" value="Submit">Logga in</button>
+                            
                         </div>
                     </div>
 

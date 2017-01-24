@@ -1,0 +1,17 @@
+<div class="container">
+        <h1 ng-repeat="recipes in recipe">{{recipes.recipe_name}}</h1>
+    <div class="row">
+        <div class="col-xs-7 col-sm-6 col-lg-8 pull-right">
+            
+            <h2 ng-repeat="recipes in recipe">{{recipes.recipe_instruction}}</h2>
+            <h3>{{recipes.category_name}}</h3>
+            
+        </div>
+
+        <div class="col-xs-5 col-sm-6 col-lg-4 pull-left">
+            <ul ng-repeat="ingredient in ingredients">
+                <li>{{ingredient.ingredient_name}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
