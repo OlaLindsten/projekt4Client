@@ -3,33 +3,33 @@
         <div class="col-lg-11 col-md-offset-1">
             <h2>Add recipe</h2>
 
-            <div ng-show="isLoggdIn">
-                <p>´Please add the different criterias:</p>
-                <form ng-submit="addRecipe()">
+            <p>Please add the different criterias:</p>
+            <form>
 
-                    <div class="form-group">
-                        <label for="name">Name of Recipe:
-                            <input type="text" ng-model="rec_name" id="name"></label> <br/>
+                <div class="form-group">
+                    <label for="name">Name of Recipe:
+                        <input type="text" ng-model="rec_name" id="name"></label> <br/>
 
+                    <label for="description">Description of Recipe:
+                        <textarea ng-model="rec_des" id="description"></textarea></label> <br/>
 
-                        <label for="description">Description of Recipe:
-                            <textarea ng-model="rec_des" id="description"></textarea></label> <br/>
+                    <label for="instruction">Instruction of Recipe:
+                        <textarea ng-model="rec_ins" id="instruction"></textarea></label> <br/>   
 
-                        <label for="instruction">Instruction of Recipe:
-                            <textarea ng-model="rec_ins" id="instruction"></textarea></label> <br/>   
+                    <label> Category: <select ng-model="rec_cat">
+                            <option ng-repeat="recipes in category" value="{{recipes.category_id}}">{{recipes.category_name}}</option>
+                        </select></label> <br/>
 
-                        <label> Category: <select ng-model="rec_cat">
-                                <option ng-repeat="recipes in recipe" value="{{recipes.category_id}}">{{recipes.category_name}}</option>
-                            </select></label> <br/>
-
-                            <input type="submit" class="btn btn-primary" value="Add recipe" onclick="addRecipe()"/>
-
-
-                    </div>
+                    <label for="name">Link to image of Recipe:
+                        <input type="text" ng-model="rec_img" id="img"></label> <br/>
+                        
+                    <input type="submit" class="btn btn-primary" value="Add recipe" ng-click="addRecipe()"/>
 
 
-                </form>
-            </div>
+                </div>
+
+
+            </form>
         </div>
     </div>
 </div>
