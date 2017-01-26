@@ -17,7 +17,7 @@
                         <textarea ng-model="rec_ins" id="instruction"></textarea></label> <br/>   
 
                     <label> Category: <select ng-model="rec_cat">
-                            <option ng-repeat="recipes in category" value="{{recipes.category_id}}">{{recipes.category_name}}</option>
+                            <option ng-repeat="recipe in category" value="{{recipe.category_id}}">{{recipe.category_name}}</option>
                         </select></label> <br/>
 
                     <label for="name">Link to image of Recipe:

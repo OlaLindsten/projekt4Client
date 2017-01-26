@@ -1,20 +1,20 @@
-<div class="container ">
-            <h1 ng-repeat="recipes in recipe">{{recipes.recipe_name}}</h1>
+<div class="container " ng-repeat="recipes in recipe">
+    <h1>{{recipes.recipe_name}}</h1>
     <div class="row col-md-6 pull-left">
 
-        <a ng-repeat="recipes in recipe"><img ng-src="{{recipes.image}}" alt="head" class="head"/></a>
+        <a ng-repeat="recipe_name in recipe"><img ng-src="{{recipes.image}}" alt="head" class="head"/></a>
 
     </div>
-        
-        
-        <div class="row col-md-6 pull-right">
-            <h2 id="des" ng-repeat="recipes in recipe">
-                {{recipes.recipe_description}}
-            </h2>
-        </div>
-        
-        
+
+
+    <div class="row col-md-6 pull-right">
+        <h2 id="des" >
+            {{recipes.recipe_description}}
+        </h2>
     </div>
+
+
+</div>
 
 <div class="container">
     <div class="row">
@@ -26,8 +26,8 @@
 
         <div class="col-md-4 pull-left">
             <h3>Ingredients:</h3>
-            <ul ng-repeat="inge in ingredient">
-                
+            <ul ng-repeat="inge in ingredients">
+
                 <li>{{inge.inge}} : {{inge.amount}}</li>
             </ul>
         </div>

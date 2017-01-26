@@ -23,50 +23,62 @@ module.config(function ($urlRouterProvider, $stateProvider) {
     });
 });
 
-module.controller("homeCtrl", function ($scope, recipeService) {
+module.controller("homeCtrl", function ($scope, recipeService, $rootScope) {
     var promise = recipeService.getRecipe();
     console.log("hej");
     promise.then(function (data) {
-        $scope.recipe = data.data;
+        $scope.recipes = data.data;
         console.log(data.data);
-                console.log("hej2");
+        console.log("hej2");
     });
+
+
+    $scope.deleteRecipe = function (id, author) {
+        if($rootScope.user === author){
+        return recipeService.deleteRecipe(id);
+    }else{
+            alert("inte ditt recept");
+            console.log(author);
+    }
+    };
 });
 
 module.controller("viewRecipeCtrl", function ($scope, $stateParams, recipeService) {
+    console.log($stateParams.id);
     var promise = recipeService.getRecipeId($stateParams.id);
     promise.then(function (data) {
         $scope.recipe = data.data;
         console.log($scope.recipe);
     });
-    
+
     var promise2 = recipeService.getRecipeIngredients($stateParams.id);
     promise2.then(function (data) {
+        console.log("hejsn inge");
         console.log(data.data);
-        $scope.ingredient = data.data;
+        $scope.ingredients = data.data;
     });
 
 });
 
 module.controller("addRecipeCtrl", function ($scope, $rootScope, recipeService) {
-
-    recipeService.getRecipe().then(function (data) {
-        $scope.recipe = data.data;
-        console.log(data.data);
-        console.log("hejsan");
-    });
-    
-    recipeService.getCategory().then(function (data){
-       $scope.category = data.data;
-       
-       console.log("tjabba");
-    });  
-
-    $scope.addRecipe = function () {
-        recipeService.addRecipe($scope.rec_name, $scope.rec_des, $scope.rec_ins, Number($scope.rec_aut), $scope.rec_cat, $scope.rec_img);
-    };
-    
-}); 
+ 
+ recipeService.getRecipe().then(function (data) {
+ $scope.recipe = data.data;
+ console.log(data.data);
+ console.log("hejsan");
+ });
+ 
+ recipeService.getCategory().then(function (data){
+ $scope.category = data.data;
+ 
+ console.log("tjabba");
+ });  
+ 
+ $scope.addRecipe = function () {
+ recipeService.addRecipe($scope.rec_name, $scope.rec_des, $scope.rec_ins, Number($scope.rec_aut), $scope.rec_cat, $scope.rec_img);
+ };
+ 
+ });  
 
 module.service("recipeService", function ($q, $http, $rootScope) {
 
@@ -104,8 +116,8 @@ module.service("recipeService", function ($q, $http, $rootScope) {
         });
         return deffer.promise;
     };
-    
-        this.getCategory = function () {
+
+    this.getCategory = function () {
         var deffer = $q.defer();
         var url = "http://localhost:8080/projekt4/webresources/category";
         $http.get(url).then(function (data) {
@@ -137,11 +149,11 @@ module.service("recipeService", function ($q, $http, $rootScope) {
             headers: {'Authorization': auth}
         }).then(function (data) {
             console.log("Recept tillagd");
-        }),(function (data) {
-                    console.log("Det blev fel");
-                    console.log(data);
-                });
-                console.log($rootScope.user);
+        }), (function (data) {
+            console.log("Det blev fel");
+            console.log(data);
+        });
+        console.log($rootScope.user);
     };
 
     this.loggIn = function (username, password) {
@@ -179,6 +191,28 @@ module.service("recipeService", function ($q, $http, $rootScope) {
             alert("Användare finns redan försök igen");
         });
 
+    };
+
+    this.deleteRecipe = function (id, author) {
+        var url = "http://localhost:8080/projekt4/webresources/recipe/" + id;
+
+        var auth = "Basic " + window.btoa($rootScope.user + ":" + $rootScope.pass);
+        console.log(auth);
+        console.log(url);
+        console.log("bajs");
+        $http({
+            url: url,
+            method: "DELETE",
+            headers: {'Authorization': auth}
+
+        }).then(function (data) {
+            console.log("Receipe borttagen");
+            alert("recipe Deleted");
+        }).error(function (data) {
+            console.log("det blev fel");
+            alert("It is not your recipe");
+        });
+        console.log("bajs");
     };
 
 });

@@ -8,6 +8,11 @@ body{
     padding-top: 70px;
     font-size: 20px;
 }
+#logo img{
+    max-width:100px; 
+    margin-top: -7px;
+    height: 40px;
+}
 .start{
     background-image: url("../img/background.jpg");
     height: 100vh;
@@ -20,28 +25,13 @@ ul.nav a:hover {
     cursor: pointer;
 
 }
-.text-center{
-    text-align: center;
-}
 .navbar-default{
     background-color: #ffffff;
 }
-#wrap {
-    min-height: 100%;
-}
-
 #main {
     overflow:auto;
     padding-bottom:150px; 
 }
-
-.footer {
-    position: relative;
-    margin-top: -150px; 
-    height: 150px;
-    clear:both;
-    padding-top:20px;
-} 
 ul{
     list-style-type: none;
 }
@@ -89,4 +79,7 @@ h3{
 }
 .heeder{
     color: white;
+}
+#x{
+    cursor: pointer;
 }

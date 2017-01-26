@@ -1,22 +1,21 @@
 <nav class="navbar navbar-fixed-top navbar-default">
     <div class="container">
         <div class="navbar-header">
-            <!-- Header -->
-
-            <a class="navbar-left page-scroll"> </a>
+            <!-- Header -->            
+            <a class="navbar-left navbar-brand" id="logo" ui-sref="home" title="OlasFood"><img src="img/logga.png"</a> 
             <button class="navbar-toggle" data-toggle="collapse" data-target="#nav-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-
+            
         </div>
         <div class="collapse navbar-collapse navbar-right" id="nav-collapse">
             <!-- Innehåll -->
             <ul class=" nav navbar-nav">
                 <li><a ui-sref="home"> Home</a></li>
                 <li><a ng-show="isLoggedIn" ui-sref="addRecipe"> Add recipe</a></li>
-                <li><a ng-show="isLoggedIn" ui-sref="changeRecipe"> Update or delete recipe </a></li>
+                <li><a ng-show="isLoggedIn">Logged in: {{user}}</a></li>
                 <li><a ng-hide="isLoggedIn" data-toggle="modal" data-target="#myModal"> Login </a></li>
             </ul>
             </nav>
@@ -41,7 +40,7 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button class="btn btn-block" data-dismiss="modal" ng-click="loggIn()" type="submit" value="Submit">Logga in</button>
+                            <button class="btn btn-block btn-primary" data-dismiss="modal" ng-click="loggIn()" type="submit" value="Submit">Logga in</button>
                             
                         </div>
                     </div>

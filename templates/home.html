@@ -1,40 +1,42 @@
-        <div class="start">
+<div class="start">
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2">
-            <h2 class="heeder">Recipes</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2 class="heeder">Recipes</h2>
                 <div id="custom-search-input">
-                <div class="input-group col-md-12">
-                    <input type="text" class="form-control input-lg" ng-model="query" placeholder="Search" />
-                    <span class="input-group-btn">
-                        <button class="btn btn-info btn-lg" type="button">
-                            <i class="glyphicon glyphicon-search"></i>
-                        </button>
-                    </span>
+                    <div class="input-group col-md-12">
+                        <input type="text" class="form-control input-lg" ng-model="query" placeholder="Search" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-info btn-lg" type="button">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
-            <div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2">
-            <table class="table table-responsive table-hover">
-                <tr><th>Name</th> <th>Description</th><th>By</th><th>Category</th><th>ReadMore </th></tr>
-                <tr ng-repeat="recipes in recipe| filter:query"> 
-                    <td>{{recipes.recipe_name}}</td>
-                    <td>{{recipes.recipe_description}}</td>
-                    <td>{{recipes.username}}</td>
-                    <td>{{recipes.category_name}}</td>
-                    <td><input class="btn btn-primary btn-block" type="submit" value="More" ui-sref="viewRecipe({id: recipes.recipe_id})" ng-click="getRecipeId()"/></td>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <table class="table table-responsive table-hover">
+                    <tr><th ng-show="isLoggedIn">Delete</th><th>Name</th> <th>Description</th><th>By</th><th>Category</th><th>ReadMore </th></tr>
+                    <tr ng-repeat="recipe in recipes| filter:query"> 
+                        <td ng-show="isLoggedIn"><a ng-click="deleteRecipe(recipe.recipe_id, recipe.username)" class="glyphicon glyphicon-remove menu_links" id="x"></a></td>
+                        <td>{{recipe.recipe_name}}</td>
+                        <td>{{recipe.recipe_description}}</td>
+                        <td>{{recipe.username}}</td>
+                        <td>{{recipe.category_name}}</td>
 
-                </tr>
-            </table>
+                        <td><input class="btn btn-primary btn-block" type="submit" value="More" ui-sref="viewRecipe({id: recipe.recipe_id})" ng-click="getRecipeId()"/></td>
+
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </div>
-            </div>
