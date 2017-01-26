@@ -11,10 +11,10 @@
                         <input type="text" ng-model="rec_name" id="name"></label> <br/>
 
                     <label for="description">Description of Recipe:
-                        <textarea ng-model="rec_des" id="description"></textarea></label> <br/>
+                        <textarea ng-model="rec_desc" id="description"></textarea></label> <br/>
 
                     <label for="instruction">Instruction of Recipe:
-                        <textarea ng-model="rec_ins" id="instruction"></textarea></label> <br/>   
+                        <textarea ng-model="rec_inst" id="instruction"></textarea></label> <br/>   
 
                     <label> Category: <select ng-model="rec_cat">
                             <option ng-repeat="recipe in category" value="{{recipe.category_id}}">{{recipe.category_name}}</option>

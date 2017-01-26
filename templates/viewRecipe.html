@@ -1,9 +1,9 @@
 <div class="container " ng-repeat="recipes in recipe">
-    <h1>{{recipes.recipe_name}}</h1>
+    <h1 id="name1">{{recipes.recipe_name}}</h1>
     <div class="row col-md-6 pull-left">
 
         <a ng-repeat="recipe_name in recipe"><img ng-src="{{recipes.image}}" alt="head" class="head"/></a>
-
+        <p>By: {{user}}</p>
     </div>
 
 

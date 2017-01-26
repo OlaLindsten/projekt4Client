@@ -34,12 +34,12 @@ module.controller("homeCtrl", function ($scope, recipeService, $rootScope) {
 
 
     $scope.deleteRecipe = function (id, author) {
-        if($rootScope.user === author){
-        return recipeService.deleteRecipe(id);
-    }else{
+        if ($rootScope.user === author) {
+            return recipeService.deleteRecipe(id);
+        } else {
             alert("inte ditt recept");
             console.log(author);
-    }
+        }
     };
 });
 
@@ -61,24 +61,31 @@ module.controller("viewRecipeCtrl", function ($scope, $stateParams, recipeServic
 });
 
 module.controller("addRecipeCtrl", function ($scope, $rootScope, recipeService) {
- 
- recipeService.getRecipe().then(function (data) {
- $scope.recipe = data.data;
- console.log(data.data);
- console.log("hejsan");
- });
- 
- recipeService.getCategory().then(function (data){
- $scope.category = data.data;
- 
- console.log("tjabba");
- });  
- 
- $scope.addRecipe = function () {
- recipeService.addRecipe($scope.rec_name, $scope.rec_des, $scope.rec_ins, Number($scope.rec_aut), $scope.rec_cat, $scope.rec_img);
- };
- 
- });  
+
+    recipeService.getRecipe().then(function (data) {
+        $scope.recipe = data.data;
+        console.log(data.data);
+        console.log("hejsan");
+    });
+
+    var promise = recipeService.getCategory();
+    promise.then(function (data) {
+        $scope.category = data.data;
+
+        console.log("tjabba");
+    });
+
+    $scope.addRecipe = function () {
+        console.log("name"+$scope.rec_name);
+        console.log("description"+$scope.rec_desc);
+        console.log("instruktion"+$scope.rec_inst);
+        console.log("author"+$scope.rec_aut);
+        console.log("category"+$scope.rec_cat);
+        console.log("img"+$scope.rec_img);
+        recipeService.addRecipe($scope.rec_name, $scope.rec_desc, $scope.rec_inst, Number($scope.rec_aut), $scope.category, $scope.rec_img);
+    };
+
+});
 
 module.service("recipeService", function ($q, $http, $rootScope) {
 
@@ -128,16 +135,19 @@ module.service("recipeService", function ($q, $http, $rootScope) {
         return deffer.promise;
     };
 
-    this.addRecipe = function (rec_name, rec_des, rec_ins, rec_cat, rec_img, $scope) {
+    this.addRecipe = function (rec_name, rec_desc, rec_inst, $scope, rec_img) {
         var data = {
             recipe_name: rec_name,
-            recipe_description: rec_des,
-            recipe_instruction: rec_ins,
+            recipe_description: rec_desc,
+            recipe_instruction: rec_inst,
             recipe_author: $rootScope.user,
-            category_name: rec_cat,
+            category_name: $scope.category,
             image: rec_img
-
+            
         };
+        
+        console.log($scope.category);
+
         var url = "http://localhost:8080/projekt4/webresources/recipe";
         console.log(rec_name);
         var auth = "Basic " + window.btoa($rootScope.user + ":" + $rootScope.pass);
